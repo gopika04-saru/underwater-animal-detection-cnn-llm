@@ -1,7 +1,6 @@
 # Base Paper Study and Literature Review
----
+
 # Underwater Computer Vision using Deep Learning
----
 
 ### Base Paper
 
@@ -26,7 +25,7 @@ Recent developments in Deep Learning (DL) have significantly improved the perfor
 
 This paper presents a comprehensive survey of deep learning models used for underwater object detection, segmentation, and tracking.
 
-###
+---
 
 ### 2. Challenges in Underwater Computer Vision
 
@@ -81,7 +80,7 @@ Lighting underwater changes due to:
 
 These variations create inconsistent illumination across images.
 
-###
+---
 
 ### 3. Role of Deep Learning in Underwater Vision
 
@@ -97,7 +96,7 @@ Deep learning helps in:
 
 These techniques significantly improve the performance of underwater vision systems.
 
-###
+---
 
 ### 4. Deep Learning Architectures Used
 
@@ -172,7 +171,7 @@ Advantages
 
 These models are particularly useful for tracking moving marine animals.
 
-###
+---
 
 ### 5. Underwater Object Detection
 
@@ -197,7 +196,7 @@ These systems perform well even in:
 - Camouflage situations
 - Small object detection
 
-###
+---
 
 ### 6. Underwater Object Tracking
 
@@ -211,7 +210,7 @@ Applications include:
 
 Transformer-based tracking models improve tracking performance by analyzing spatial and temporal features.
 
-###
+---
 
 ### 7. Alternative Imaging Modalities
 
@@ -279,7 +278,7 @@ Deep learning-based underwater vision systems are used in several domains.
 
 - Helping underwater robots navigate safely.
 
-###
+---
 
 ### 9. Limitations and Research Gaps
 
@@ -300,7 +299,7 @@ Real-Time Processing Challenges
 - Some models are slow
 - Real-time detection still needs improvement
 
-###
+---
 
 ### 10. Future Research Directions
 
@@ -326,7 +325,7 @@ Combining data from:
 
 - Reducing dependence on labeled datasets.
 
-###
+---
 
 ### 11. Key Contributions of the Paper
 
@@ -340,7 +339,7 @@ This survey paper provides:
 
 - Identification of research challenges and future opportunities
 
-###
+---
 
 ### 12. Important Points (Quick Review)
 Underwater Vision Challenges
