@@ -206,7 +206,8 @@ Applications include:
 - Underwater robot navigation
 
 Transformer-based tracking models improve tracking performance by analyzing spatial and temporal features.
----
+
+###
 
 ### 7. Alternative Imaging Modalities
 
