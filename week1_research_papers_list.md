@@ -336,7 +336,7 @@ This survey paper provides:
 
 ---
 
-12. Important Points (Quick Review)
+### 12. Important Points (Quick Review)
 Underwater Vision Challenges
 
 - Color distortion
