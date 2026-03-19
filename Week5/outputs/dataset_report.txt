@@ -1,0 +1,70 @@
+UNDERWATER ANIMAL DATASET REPORT
+================================
+
+Dataset Split Information
+-------------------------
+Train Images: 5854
+Validation Images: 3357
+Test Images: 3502
+
+Total Images:
+5854 + 3357 + 3502 = 12713
+
+Class Mapping (Starting from 1)
+-------------------------------
+1 : Clams
+2 : Corals
+3 : Crabs
+4 : Dolphin
+5 : Eel
+6 : Fish
+7 : Jelly Fish
+8 : Lobster
+9 : Nudibranchs
+10 : Octopus
+11 : Otter
+12 : Penguin
+13 : Puffers
+14 : Sea Rays
+15 : Sea Urchins
+16 : Seahorse
+17 : Seal
+18 : Sharks
+19 : Shrimp
+20 : Squid
+21 : Starfish
+22 : Turtle_Tortoise
+23 : Whale
+
+Class Distribution (Train Set)
+-------------------------------
+Clams : 294
+Corals : 259
+Crabs : 200
+Dolphin : 410
+Eel : 225
+Fish : 214
+Jelly Fish : 397
+Lobster : 227
+Nudibranchs : 188
+Octopus : 192
+Otter : 244
+Penguin : 256
+Puffers : 176
+Sea Rays : 288
+Sea Urchins : 267
+Seahorse : 190
+Seal : 190
+Sharks : 270
+Shrimp : 208
+Squid : 227
+Starfish : 249
+Turtle_Tortoise : 442
+Whale : 241
+
+Class Imbalance Analysis
+------------------------
+Max Images in Class: 442
+Min Images in Class: 176
+Imbalance Ratio: 2.51
+Status: Dataset is Imbalanced
