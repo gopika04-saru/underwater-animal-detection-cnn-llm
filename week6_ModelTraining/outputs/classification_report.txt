@@ -1,0 +1,29 @@
+                      precision    recall  f1-score   support
+
+          Clams_test       0.48      0.58      0.52       102
+         Corals_test       0.47      0.84      0.60       128
+          Crabs_test       0.98      0.92      0.95       155
+        Dolphin_test       0.71      0.85      0.77       144
+            Eel_test       0.55      0.74      0.63       152
+           Fish_test       0.74      0.49      0.59       152
+     Jelly fish_test       0.95      0.89      0.92       264
+        Lobster_test       0.72      0.67      0.70       144
+    Nudibranchs_test       0.78      0.57      0.66       160
+        Octopus_test       0.67      0.43      0.53       178
+          Otter_test       0.99      0.99      0.99       136
+        Penguin_test       0.80      0.79      0.80       106
+        Puffers_test       0.84      0.67      0.75       192
+       Sea Rays_test       0.58      0.67      0.62       117
+    Sea Urchins_test       0.95      0.98      0.97       168
+       Seahorse_test       0.70      0.85      0.77       120
+           Seal_test       0.79      0.69      0.73        80
+         Sharks_test       0.62      0.63      0.62       160
+         Shrimp_test       0.70      0.55      0.61       152
+          Squid_test       0.61      0.70      0.65       128
+       Starfish_test       0.88      0.95      0.92       132
+Turtle_Tortoise_test       0.90      0.91      0.91       280
+          Whale_test       0.69      0.64      0.66       152
+
+            accuracy                           0.75      3502
+           macro avg       0.74      0.74      0.73      3502
+        weighted avg       0.76      0.75      0.75      3502
