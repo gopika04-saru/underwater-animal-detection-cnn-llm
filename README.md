@@ -2,18 +2,6 @@
 
 A deep learning project for detecting and classifying 23 different underwater marine animals using Convolutional Neural Networks (CNN). This project implements multiple CNN architectures including custom CNN, MobileNetV2, and ResNet50 for image classification.
 
-## 📋 Table of Contents
-- [Project Overview](#project-overview)
-- [Dataset](#dataset)
-- [Models Implemented](#models-implemented)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Results](#results)
-- [Future Work](#future-work)
-
----
-
 ## 🎯 Project Overview
 
 This is a final year project focused on underwater animal detection using deep learning. The current implementation covers:
@@ -347,9 +335,9 @@ python predict_single_image.py --image ../Week4_Dataset_collection/Dataset/Test/
 
 ## 👥 Contributors
 
-- **Your Name** - Final Year Project
-- **Institution:** [Your University]
-- **Year:** 2026
+- **Your Name** - Undaer Water Animal Detection using CNN and LLM
+- **Institution:** Indian Institute of information technology tiruchirappalli
+- **Year:** 2022-2026
 
 ---
 
@@ -371,11 +359,7 @@ This project is created for educational purposes as part of a final year project
 ## 📞 Contact
 
 For questions or feedback:
-- Email: [your.email@example.com]
-- GitHub: [your-github-username]
+- Email: [kotakalagopika@gmail.com]
+- GitHub: [https://github.com/gopika04-saru/underwater-animal-detection-cnn-llm.git](https://github.com/gopika04-saru/underwater-animal-detection-cnn-llm)
 
 ---
-
-**Last Updated:** March 21, 2026
-
-**Status:** ✅ Ready for Review (CNN Implementation Complete)
