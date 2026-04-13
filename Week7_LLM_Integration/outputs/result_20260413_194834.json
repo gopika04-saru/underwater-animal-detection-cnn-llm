@@ -1,0 +1,8 @@
+{
+    "image": "C:\\Users\\kotak\\Downloads\\underwater-animal-detection-cnn-llm\\underwater-animal-detection-cnn-llm\\Week4_Dataset_collection\\Dataset\\Test\\Seahorse_test\\3438880498_d7cf714bde_o.jpg",
+    "prediction": {
+        "animal": "Seahorse",
+        "confidence": 98.75975036621094
+    },
+    "description": "Seahorses are unique fish where males carry and give birth to offspring. They swim upright and live in shallow waters."
+}

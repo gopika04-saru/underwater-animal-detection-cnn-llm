@@ -1,0 +1,32 @@
+======================================================================
+UNDERWATER ANIMAL DETECTION WITH AI DESCRIPTION
+======================================================================
+
+Timestamp: 2026-04-11 16:27:50
+Image: C:\Users\kotak\Downloads\underwater-animal-detection-cnn-llm\underwater-animal-detection-cnn-llm\Week4_Dataset_collection\Dataset\Test\Clams_test\227725083_d7c43ee69e_o.jpg
+
+----------------------------------------------------------------------
+CNN PREDICTION:
+----------------------------------------------------------------------
+Animal: Clams
+Confidence: 90.35%
+
+Top 3 Predictions:
+  1. Clams                 90.35%
+  2. Octopus                3.77%
+  3. Corals                 3.04%
+
+----------------------------------------------------------------------
+AI-GENERATED DESCRIPTION:
+----------------------------------------------------------------------
+The Clams is a marine animal that lives in the Antarctic at the end of the year.
+
+The Clams is a common marine mammal in the Antarctic, but its population has been declining since the 1970s. It is also a common mammal in the Faroe Islands and the Northern Ocean.
+
+For this reason, the Clams is a very popular tourist attraction in the Faroe Islands and in the Southern Ocean. The Clams is often seen at Christmas in the Faroe Islands, and it is a popular holiday to see the Clams as it is a popular holiday for many people in the Faroe Islands.
+
+The Clams is a common marine mammal in the Antarctic, but its population has been declining since the 1970s. It is also a common mammal in the Faroe Islands and in the Northern Ocean.
+
+The Clams is a common marine mammal in the Antarctic, but its population has been declining since the 1970s. It is also a common mammal in the Faroe Islands and in the Northern Ocean.
+
+======================================================================

@@ -1,0 +1,8 @@
+{
+    "image": "C:\\Users\\kotak\\Downloads\\underwater-animal-detection-cnn-llm\\underwater-animal-detection-cnn-llm\\Week4_Dataset_collection\\Dataset\\Test\\Eel_test\\8022276229_501bed6602_o.jpg",
+    "prediction": {
+        "animal": "Puffers",
+        "confidence": 30.537458419799805
+    },
+    "description": "Pufferfish can inflate themselves and contain toxic substances."
+}

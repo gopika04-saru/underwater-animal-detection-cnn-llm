@@ -1,0 +1,8 @@
+{
+    "image": "C:\\Users\\kotak\\Downloads\\underwater-animal-detection-cnn-llm\\underwater-animal-detection-cnn-llm\\Week4_Dataset_collection\\Dataset\\Test\\Clams_test\\227725083_d7c43ee69e_o.jpg",
+    "prediction": {
+        "animal": "Clams",
+        "confidence": 90.34697723388672
+    },
+    "description": "Clams are bivalve mollusks that filter feed by pumping water through their shells. They can live for decades, with some species living over 500 years. Clams burrow in sand or mud and are important filter feeders in marine ecosystems."
+}

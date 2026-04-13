@@ -1,0 +1,15 @@
+# LLM Integration Additional Requirements
+# Install these in addition to base requirements.txt
+
+# Option 1: OpenAI GPT (Recommended for production)
+openai>=1.0.0
+
+# Option 2: Local LLM with Transformers (Free, runs locally)
+transformers>=4.30.0
+torch>=2.0.0
+
+# Optional: For better text processing
+nltk>=3.8.0
+
+# Note: You only need to install ONE of the above options
+# For quick start with fallback descriptions, no additional packages needed!
