@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐠 Underwater Animal Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .upload-area:hover {
+            background: #f0f2ff;
+            border-color: #5568d3;
+        }
+
+        .upload-area.dragover {
+            background: #e8ebff;
+            border-color: #4451b8;
+        }
+
+        .upload-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .upload-text {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-subtext {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .options {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .results {
+            margin-top: 40px;
+        }
+
+        .result-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .result-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .animal-name {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .confidence {
+            font-size: 1.3em;
+            color: #4caf50;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .top-predictions {
+            margin-top: 15px;
+        }
+
+        .prediction-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .prediction-bar {
+            flex: 1;
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .prediction-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s;
+        }
+
+        .description {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .description-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .description-text {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05em;
+        }
+
+        .description-source {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #999;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #c62828;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .bulk-summary {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .bulk-summary h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .file-list {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .file-item {
+            padding: 10px;
+            background: white;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-file {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-file:hover {
+            background: #d32f2f;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .result-header {
+                flex-direction: column;
+            }
+
+            .result-image {
+                width: 100%;
+                height: auto;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐠 Underwater Animal Detection</h1>
+            <p>AI-Powered Marine Life Identification with CNN + LLM</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('single')">📷 Single Image</button>
+                <button class="tab" onclick="switchTab('bulk')">📁 Bulk Upload</button>
+            </div>
+
+            <!-- Single Image Tab -->
+            <div id="single-tab" class="tab-content active">
+                <div class="upload-area" id="single-upload-area" onclick="document.getElementById('single-file-input').click()">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Click to upload or drag and drop</div>
+                    <div class="upload-subtext">Supported formats: JPG, PNG, JPEG, BMP (Max 16MB)</div>
+                </div>
+                <input type="file" id="single-file-input" class="file-input" accept="image/*" onchange="handleSingleFile(this.files[0])">
+
+                <div class="options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="single-use-openai">
+                        <span>🤖 Use OpenAI GPT for descriptions (requires API key)</span>
+                    </label>
+                </div>
+
+                <div id="single-preview"></div>
+
+                <button id="single-predict-btn" class="btn btn-primary" onclick="predictSingle()" style="display: none;">
+                    🔍 Analyze Image
+                </button>
+
+                <div id="single-results"></div>
+            </div>
+
+            <!-- Bulk Upload Tab -->
+            <div id="bulk-tab" class="tab-content">
+                <div class="upload-area" id="bulk-upload-area" onclick="document.getElementById('bulk-file-input').click()">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Click to upload multiple images or drag and drop</div>
+                    <div class="upload-subtext">Supported formats: JPG, PNG, JPEG, BMP (Max 16MB per file)</div>
+                </div>
+                <input type="file" id="bulk-file-input" class="file-input" accept="image/*" multiple onchange="handleBulkFiles(this.files)">
+
+                <div class="options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="bulk-use-openai">
+                        <span>🤖 Use OpenAI GPT for descriptions (requires API key)</span>
+                    </label>
+                </div>
+
+                <div id="bulk-file-list"></div>
+
+                <button id="bulk-predict-btn" class="btn btn-primary" onclick="predictBulk()" style="display: none;">
+                    🔍 Analyze All Images
+                </button>
+
+                <div id="bulk-results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let singleFile = null;
+        let bulkFiles = [];
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            if (tab === 'single') {
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('single-tab').classList.add('active');
+            } else {
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('bulk-tab').classList.add('active');
+            }
+        }
+
+        // Drag and drop for single image
+        const singleUploadArea = document.getElementById('single-upload-area');
+        singleUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            singleUploadArea.classList.add('dragover');
+        });
+        singleUploadArea.addEventListener('dragleave', () => {
+            singleUploadArea.classList.remove('dragover');
+        });
+        singleUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            singleUploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleSingleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        // Drag and drop for bulk upload
+        const bulkUploadArea = document.getElementById('bulk-upload-area');
+        bulkUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            bulkUploadArea.classList.add('dragover');
+        });
+        bulkUploadArea.addEventListener('dragleave', () => {
+            bulkUploadArea.classList.remove('dragover');
+        });
+        bulkUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            bulkUploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleBulkFiles(e.dataTransfer.files);
+            }
+        });
+
+        // Handle single file
+        function handleSingleFile(file) {
+            if (!file) return;
+            
+            singleFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('single-preview').innerHTML = `
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span>📄 ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('single-predict-btn').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Handle bulk files
+        function handleBulkFiles(files) {
+            bulkFiles = Array.from(files);
+            
+            let html = '<div class="file-list"><h3>📁 Selected Files (' + bulkFiles.length + ')</h3>';
+            bulkFiles.forEach((file, index) => {
+                html += `
+                    <div class="file-item">
+                        <span>📄 ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                        <button class="remove-file" onclick="removeFile(${index})">Remove</button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            document.getElementById('bulk-file-list').innerHTML = html;
+            document.getElementById('bulk-predict-btn').style.display = 'block';
+        }
+
+        // Remove file from bulk list
+        function removeFile(index) {
+            bulkFiles.splice(index, 1);
+            if (bulkFiles.length > 0) {
+                handleBulkFiles(bulkFiles);
+            } else {
+                document.getElementById('bulk-file-list').innerHTML = '';
+                document.getElementById('bulk-predict-btn').style.display = 'none';
+            }
+        }
+
+        // Predict single image
+        async function predictSingle() {
+            if (!singleFile) return;
+
+            const resultsDiv = document.getElementById('single-results');
+            const btn = document.getElementById('single-predict-btn');
+            
+            btn.disabled = true;
+            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Analyzing image...</p></div>';
+
+            const formData = new FormData();
+            formData.append('file', singleFile);
+            formData.append('use_openai', document.getElementById('single-use-openai').checked);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    resultsDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                } else {
+                    displayResult(data, resultsDiv);
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // Predict bulk images
+        async function predictBulk() {
+            if (bulkFiles.length === 0) return;
+
+            const resultsDiv = document.getElementById('bulk-results');
+            const btn = document.getElementById('bulk-predict-btn');
+            
+            btn.disabled = true;
+            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Analyzing ' + bulkFiles.length + ' images...</p></div>';
+
+            const formData = new FormData();
+            bulkFiles.forEach(file => {
+                formData.append('files[]', file);
+            });
+            formData.append('use_openai', document.getElementById('bulk-use-openai').checked);
+
+            try {
+                const response = await fetch('/predict_bulk', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    resultsDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                } else {
+                    displayBulkResults(data, resultsDiv);
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // Display single result
+        function displayResult(data, container) {
+            const pred = data.prediction;
+            const desc = data.description;
+            
+            let html = `
+                <div class="result-card">
+                    <div class="result-header">
+                        <img src="data:image/jpeg;base64,${data.image}" class="result-image" alt="${pred.animal}">
+                        <div class="result-info">
+                            <div class="animal-name">🐠 ${pred.animal}</div>
+                            <div class="confidence">📊 Confidence: ${pred.confidence.toFixed(2)}%</div>
+                            <div class="top-predictions">
+                                <strong>Top 3 Predictions:</strong>
+            `;
+            
+            pred.top_predictions.forEach((p, i) => {
+                html += `
+                    <div class="prediction-item">
+                        <span style="min-width: 150px;">${i + 1}. ${p.class}</span>
+                        <div class="prediction-bar">
+                            <div class="prediction-fill" style="width: ${p.confidence}%"></div>
+                        </div>
+                        <span style="min-width: 60px; text-align: right;">${p.confidence.toFixed(2)}%</span>
+                    </div>
+                `;
+            });
+            
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="description-title">📖 Description</div>
+                        <div class="description-text">${desc}</div>
+                        <div class="description-source">Source: ${data.description_source === 'openai' ? '🤖 OpenAI GPT' : '📚 Curated Database'}</div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Display bulk results
+        function displayBulkResults(data, container) {
+            let html = `
+                <div class="bulk-summary">
+                    <h3>✅ Analysis Complete</h3>
+                    <p>Processed ${data.total} images</p>
+                </div>
+            `;
+            
+            data.results.forEach((result, index) => {
+                if (result.success) {
+                    html += `<div class="result-card">`;
+                    html += `<h3 style="color: #667eea; margin-bottom: 20px;">Image ${index + 1}: ${result.filename}</h3>`;
+                    html += `<div class="result-header">
+                        <img src="data:image/jpeg;base64,${result.image}" class="result-image" alt="${result.prediction.animal}">
+                        <div class="result-info">
+                            <div class="animal-name">🐠 ${result.prediction.animal}</div>
+                            <div class="confidence">📊 Confidence: ${result.prediction.confidence.toFixed(2)}%</div>
+                            <div class="top-predictions">
+                                <strong>Top 3 Predictions:</strong>`;
+                    
+                    result.prediction.top_predictions.forEach((p, i) => {
+                        html += `
+                            <div class="prediction-item">
+                                <span style="min-width: 150px;">${i + 1}. ${p.class}</span>
+                                <div class="prediction-bar">
+                                    <div class="prediction-fill" style="width: ${p.confidence}%"></div>
+                                </div>
+                                <span style="min-width: 60px; text-align: right;">${p.confidence.toFixed(2)}%</span>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="description-title">📖 Description</div>
+                        <div class="description-text">${result.description}</div>
+                        <div class="description-source">Source: ${result.description_source === 'openai' ? '🤖 OpenAI GPT' : '📚 Curated Database'}</div>
+                    </div>
+                    </div>`;
+                } else {
+                    html += `
+                        <div class="result-card">
+                            <h3 style="color: #f44336;">Image ${index + 1}: ${result.filename}</h3>
+                            <div class="error">❌ Error: ${result.error}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
